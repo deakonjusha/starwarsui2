@@ -35,13 +35,12 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Characters data={characters} />} />
 
-          {characters.map((character) => (
-            <Route
-              path={`/characters/${character.id}`}
-              key={character.id}
-              element={<Character data={character} />}
-            />
-          ))}
+          <Route
+            path={`/characters/:characterid`}
+            // key={character.id}
+            action={({ params }) => {}}
+            element={<Character />}
+          />
         </Routes>
       </Router>
     </div>

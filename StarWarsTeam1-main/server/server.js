@@ -100,6 +100,15 @@ app.get("/api/characters/:id/films", async (req, res) => {
   res.json(films);
 });
 
+app.get("/api/characters/:id/planets", async (req, res) => {
+  let cid = parseInt(req.params.id);
+  const client = await MongoClient.connect(url);
+  const db = client.db(dbName);
+  const collection = db.collection("characters");
+  const films = await collection.find({ id: cid }).toArray();
+  res.json(films);
+});
+
 app.get("/api/planets/:id/films", async (req, res) => {
   let id = parseInt(req.params.id);
   const client = await MongoClient.connect(url);
