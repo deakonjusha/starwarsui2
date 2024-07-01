@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const Characters = (props) => {
+  //   console.log(props);
   return (
     <div>
       {props.data.map((char) => (

@@ -13,20 +13,31 @@ function App() {
   const [characters, setCharacters] = useState([]);
   useEffect(() => {
     const fetchCharacters = async () => {
-      const response = await fetch("http://localhost:3000/api/characters");
-      if (!response.ok) {
-        throw new Error("Data could not be fetched!");
+      try {
+        console.log("before fetch");
+
+        const response = await fetch("http://localhost:3000/api/characters");
+        console.log("after fetch");
+
+        if (!response.ok) {
+          throw new Error("Data could not be fetched!");
+        }
+        console.log("after response");
+        const json_response = await response.json();
+        setCharacters(json_response);
+        console.log("TEST2", json_response);
+      } catch (error) {
+        console.error("Error fetching socks:", error);
       }
-      const json_response = await response.json();
-      setCharacters(json_response);
     };
+    console.log("Fetching characters");
     fetchCharacters();
   }, []);
 
   return (
     <div>
       <h1> Star Wars Universe Lookup </h1>
-      {console.log("TEST")}
+      {console.log("A", characters)}
       <Characters data={characters} />
       {/* <CharacterList /> */}
       <Router>

@@ -6,12 +6,11 @@ import dotenv from "dotenv";
 dotenv.config();
 const url = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB;
+const PORT = 3000;
 
 const app = express();
-app.use(cors);
+app.use(cors());
 app.use(express.json());
-const PORT = 3000;
-// dotenv.config();
 
 app.get("/", async (req, res) => {
   res.json([""]);
