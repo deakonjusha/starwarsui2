@@ -16,7 +16,7 @@ const Character = (props) => {
         throw new Error("Data could not be fetched!");
       }
       const json_response = await response.json();
-      axios.get(`http://localhost:5000/api/characters/${props.character_id}`);
+      //   axios.get(`http://localhost:5000/api/characters/${props.character_id}`);
       setCharacter(json_response);
     };
 

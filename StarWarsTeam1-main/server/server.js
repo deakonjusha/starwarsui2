@@ -8,7 +8,7 @@ const url = process.env.MONGO_DB_URL;
 const dbName = process.env.MONGO_DB;
 
 const app = express();
-// app.use(cors);
+app.use(cors);
 app.use(express.json());
 const PORT = 3000;
 // dotenv.config();

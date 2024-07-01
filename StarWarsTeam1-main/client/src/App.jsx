@@ -28,7 +28,7 @@ function App() {
       <h1> Star Wars Universe Lookup </h1>
       {console.log("TEST")}
       <Characters data={characters} />
-      <CharacterList />
+      {/* <CharacterList /> */}
       <Router>
         {/* <Switch> */}
         {/* <Route exact path="/" component={Characters} /> */}
