@@ -51,6 +51,7 @@ const Character = (props) => {
     fetchFilmsByCharacterId();
   }, []);
 
+  console.log(props);
   return (
     <div>
       <h1 id="name">{character.name}</h1>

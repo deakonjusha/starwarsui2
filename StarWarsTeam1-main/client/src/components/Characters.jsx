@@ -1,11 +1,12 @@
 import axios from "axios";
 
 const Characters = (props) => {
-  //   console.log(props);
   return (
     <div>
       {props.data.map((char) => (
-        <div>Char: {char.name}</div>
+        <div key={char.id}>
+          <a href={`/characters/${char.id}`}>{char.name}</a>
+        </div>
       ))}
     </div>
   );
