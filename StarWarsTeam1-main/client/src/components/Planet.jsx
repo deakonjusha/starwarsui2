@@ -72,13 +72,11 @@ const Planet = () => {
       </section>
       <section id="films">
         <h2> Films featuring this planet </h2>
-        <ul>
-          {films?.map((film) => (
-            <li key={film.id}>
-              <a href={"/films/${film.film_id}"}>{film.film_id}</a>
-            </li>
-          ))}
-        </ul>
+        {films?.map((film) => (
+          <div key={film.film_id}>
+            <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
+          </div>
+        ))}
       </section>
     </div>
   );

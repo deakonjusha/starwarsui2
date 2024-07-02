@@ -37,14 +37,9 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Characters data={characters} />} />
 
-          <Route
-            path={`/characters/:characterid`}
-            // key={character.id}
-            action={({ params }) => {}}
-            element={<Character />}
-          />
-          <Route path="/planets/:planetid" element={<Planet/>}/>
-          <Route path="/films/:filmid" element={<Film/>}/>
+          <Route path={`/characters/:characterid`} element={<Character />} />
+          <Route path="/planets/:planetid" element={<Planet />} />
+          <Route path="/films/:filmid" element={<Film />} />
         </Routes>
       </Router>
     </div>
