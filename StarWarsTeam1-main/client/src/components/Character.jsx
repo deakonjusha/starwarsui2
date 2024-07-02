@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import {
   useParams,
   BrowserRouter as Router,
@@ -21,6 +20,7 @@ const Character = (props) => {
     homeworld: 0,
     birth_year: "",
   });
+  //   const [filmsId, setFilmsId] = useState([]);
   const [films, setFilms] = useState([]);
   const [planets, setPlanets] = useState({ name: "" });
 
@@ -28,51 +28,62 @@ const Character = (props) => {
   let charId = params.characterid;
 
   useEffect(() => {
-    const fetchCharacterById = async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/characters/${charId}`
-      );
-      if (!response.ok) {
-        throw new Error("Data could not be fetched!");
-      }
-      const json_response = await response.json();
-      setCharacter(json_response[0]);
-    };
+    try {
+      const fetchCharacterById = async () => {
+        const response = await fetch(
+          `http://localhost:3000/api/characters/${charId}`
+        );
+        if (!response.ok) {
+          throw new Error("Data could not be fetched!");
+        }
+        const json_response = await response.json();
+        setCharacter(json_response[0]);
+      };
 
-    fetchCharacterById();
+      fetchCharacterById();
+    } catch (error) {
+      console.error("Error fetching characters:", error);
+    }
   }, []);
 
   useEffect(() => {
-    const fetchPlanetsByCharacterId = async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/planets/${character.homeworld}`
-      );
+    try {
+      const fetchPlanetsByCharacterId = async () => {
+        const response = await fetch(
+          `http://localhost:3000/api/planets/${character.homeworld}`
+        );
 
-      if (!response.ok) {
-        throw new Error("Data could not be fetched!");
-      }
-      const json_response = await response.json();
-      setPlanets(json_response[0]);
-    };
+        if (!response.ok) {
+          throw new Error("Data could not be fetched!");
+        }
+        const json_response = await response.json();
+        setPlanets(json_response[0]);
+      };
 
-    fetchPlanetsByCharacterId();
+      fetchPlanetsByCharacterId();
+    } catch (error) {
+      console.error("Error fetching planets:", error);
+    }
   }, [character]);
 
   useEffect(() => {
-    const fetchFilmsByCharacterId = async () => {
-      const response = await fetch(
-        `http://localhost:3000/api/characters/${charId}/films`
-      );
-      if (!response.ok) {
-        throw new Error("Data could not be fetched!");
-      }
-      const json_response = await response.json();
-      setFilms(json_response);
+    try {
+      const fetchFilmsByCharacterId = async () => {
+        const response = await fetch(
+          `http://localhost:3000/api/characters/${charId}/films`
+        );
+        if (!response.ok) {
+          throw new Error("Data could not be fetched!");
+        }
+        const json_response = await response.json();
+        setFilms(json_response);
+        console.log(json_response);
+      };
 
-      console.log("films", json_response);
-    };
-
-    fetchFilmsByCharacterId();
+      fetchFilmsByCharacterId();
+    } catch (error) {
+      console.error("Error fetching films:", error);
+    }
   }, [character]);
 
   return (
@@ -91,13 +102,11 @@ const Character = (props) => {
       </section>
       <section id="films">
         <h2>Films appeared in</h2>
-        <ul>
-          {films?.map((film) => (
-            <li key={film.id}>
-              <a href={`/films/${film.film_id}`}>{film.film_id}</a>
-            </li>
-          ))}
-        </ul>
+        {films?.map((film) => (
+          <div key={film.film_id}>
+            <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
+          </div>
+        ))}
       </section>
     </div>
   );
