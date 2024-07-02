@@ -20,7 +20,6 @@ const Character = (props) => {
     homeworld: 0,
     birth_year: "",
   });
-  //   const [filmsId, setFilmsId] = useState([]);
   const [films, setFilms] = useState([]);
   const [planets, setPlanets] = useState({ name: "" });
 
@@ -104,7 +103,6 @@ const Character = (props) => {
         <h2>Films appeared in</h2>
         {films?.map((film) => (
           <div key={film.film_id}>
-            {console.log(film)}
             <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
           </div>
         ))}
