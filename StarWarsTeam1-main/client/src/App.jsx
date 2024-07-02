@@ -6,6 +6,8 @@ import axios from "axios";
 import Character from "./components/Character";
 import Characters from "./components/Characters";
 import CharacterList from "./components/CharacterList";
+import Planet from "./components/Planet";
+import Film from "./components/Film";
 
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
@@ -41,6 +43,8 @@ function App() {
             action={({ params }) => {}}
             element={<Character />}
           />
+          <Route path="/planets/:planetid" element={<Planet/>}/>
+          <Route path="/films/:filmid" element={<Film/>}/>
         </Routes>
       </Router>
     </div>
