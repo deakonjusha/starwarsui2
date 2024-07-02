@@ -23,6 +23,7 @@ const Planet = () => {
   });
 
   const [films, setFilms] = useState([]);
+  const [characters, setCharacters] = useState([])
 
   let params = useParams();
   let planetId = params.planetid;
@@ -56,6 +57,19 @@ const Planet = () => {
     fetchFilmsByPlanetId();
   }, [planetId]);
 
+  useEffect(() => {
+    const fetchCharactersByPlanetId = async () => {
+        const response = await fetch(`http://localhost:3000/api/planets/${planetId}/characters`);
+
+        if(!response.ok){
+            throw new Error("Data could not be fetched!");
+        }
+        const json_response = await response.json();
+        setCharacters(json_response);
+    };
+    fetchCharactersByPlanetId();
+  }, [planetId]);
+
   return (
     <div>
       <h1 id="name">{planet?.name}</h1>
@@ -76,6 +90,14 @@ const Planet = () => {
           <div key={film.film_id}>
             <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
           </div>
+        ))}
+      </section>
+      <section id ="characters"> 
+        <h2>Characters from this planet</h2>
+        {characters?.map((character) => (
+            <div key ={character.id}>
+                <a href={`/characters/${character.id}`}>{character.name}</a>
+            </div>
         ))}
       </section>
     </div>
