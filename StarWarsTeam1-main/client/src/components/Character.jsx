@@ -104,8 +104,7 @@ const Character = (props) => {
         <h2>Films appeared in</h2>
         {films?.map((film) => (
           <div key={film.film_id}>
-            console.log(film);
-            console.long("---");
+            {console.log(film)}
             <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
           </div>
         ))}
