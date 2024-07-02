@@ -22,7 +22,7 @@ const Character = (props) => {
     birth_year: "",
   });
   const [films, setFilms] = useState([]);
-  const [planets, setPlanets] = useState([]);
+  const [planets, setPlanets] = useState({ name: "" });
 
   let params = useParams();
   let charId = params.characterid;
@@ -37,40 +37,44 @@ const Character = (props) => {
       }
       const json_response = await response.json();
       setCharacter(json_response[0]);
-      console.log(json_response[0]);
     };
 
     fetchCharacterById();
   }, []);
 
-  //   const fetchPlanetsByCharacterId = async () => {
-  //     const response = await fetch(
-  //       `http://localhost:3000/api/characters/${charId}/planets`
-  //     );
+  useEffect(() => {
+    const fetchPlanetsByCharacterId = async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/planets/${character.homeworld}`
+      );
 
-  //     if (!response.ok) {
-  //       throw new Error("Data could not be fetched!");
-  //     }
-  //     const json_response = await response.json();
-  //     //   axios.get("http://localhost:5000/api/characters");
-  //     setPlanets(json_response);
-  //   };
-  //   const fetchFilmsByCharacterId = async () => {
-  //     const response = await fetch(
-  //       `http://localhost:3000/api/characters/${charId}/films`
-  //     );
+      if (!response.ok) {
+        throw new Error("Data could not be fetched!");
+      }
+      const json_response = await response.json();
+      setPlanets(json_response[0]);
+    };
 
-  //     if (!response.ok) {
-  //       throw new Error("Data could not be fetched!");
-  //     }
-  //     const json_response = await response.json();
-  //     //   axios.get("http://localhost:5000/api/characters");
-  //     setFilms(json_response);
-  //   };
+    fetchPlanetsByCharacterId();
+  }, [character]);
 
-  //   fetchPlanetsByCharacterId();
-  //   fetchFilmsByCharacterId();
-  //   return <>Test</>;
+  useEffect(() => {
+    const fetchFilmsByCharacterId = async () => {
+      const response = await fetch(
+        `http://localhost:3000/api/characters/${charId}/films`
+      );
+      if (!response.ok) {
+        throw new Error("Data could not be fetched!");
+      }
+      const json_response = await response.json();
+      setFilms(json_response);
+
+      console.log("films", json_response);
+    };
+
+    fetchFilmsByCharacterId();
+  }, [character]);
+
   return (
     <div>
       <h1 id="name">{character?.name}</h1>
@@ -81,16 +85,16 @@ const Character = (props) => {
       </section>
       <section id="planets">
         <h2>Homeworld</h2>
-        <p>{character?.homeworld}</p>
+        <p>
+          <a href={`/planets/${planets?.id}`}>{planets?.name}</a>
+        </p>
       </section>
       <section id="films">
         <h2>Films appeared in</h2>
         <ul>
-          {films.map((film) => (
+          {films?.map((film) => (
             <li key={film.id}>
-              <Link to={`/films/${film.id}`}>
-                <div>{film.id}</div>
-              </Link>
+              <a href={`/films/${film.film_id}`}>{film.film_id}</a>
             </li>
           ))}
         </ul>

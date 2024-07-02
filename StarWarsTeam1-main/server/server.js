@@ -17,7 +17,6 @@ app.get("/", async (req, res) => {
 });
 
 app.get("/api/planets", async (req, res) => {
-  //   console.log("---");
   const client = await MongoClient.connect(url);
   const db = client.db(dbName);
   const collection = db.collection("planets");
@@ -35,7 +34,6 @@ app.get("/api/characters", async (req, res) => {
 });
 
 app.get("/api/films", async (req, res) => {
-  //   console.log("---");
   const client = await MongoClient.connect(url);
   const db = client.db(dbName);
   const collection = db.collection("films");
@@ -44,7 +42,6 @@ app.get("/api/films", async (req, res) => {
 });
 
 app.get("/api/characters/:id", async (req, res) => {
-  //   console.log("---");
   let cid = parseInt(req.params.id);
   const client = await MongoClient.connect(url);
   const db = client.db(dbName);
@@ -54,7 +51,6 @@ app.get("/api/characters/:id", async (req, res) => {
 });
 
 app.get("/api/films/:id", async (req, res) => {
-  //   console.log("---");
   let cid = parseInt(req.params.id);
   const client = await MongoClient.connect(url);
   const db = client.db(dbName);
@@ -64,7 +60,6 @@ app.get("/api/films/:id", async (req, res) => {
 });
 
 app.get("/api/planets/:id", async (req, res) => {
-  //   console.log("---");
   let cid = parseInt(req.params.id);
   const client = await MongoClient.connect(url);
   const db = client.db(dbName);
