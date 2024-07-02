@@ -101,7 +101,7 @@ const Film = () => {
         <h2>Planets</h2>
         {planets?.map((planet) => (
           <div key={planet.planet_id}>
-            <a href={`/planet/${planet.planet_id}`}>{planet.data[0].name}</a>
+            <a href={`/planets/${planet.planet_id}`}>{planet.data[0].name}</a>
           </div>
         ))}
       </section>
