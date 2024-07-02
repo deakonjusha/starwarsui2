@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  useParams,
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-} from "react-router-dom";
-import axios from "axios";
+import { useParams, BrowserRouter as Router, Link } from "react-router-dom";
 
 const Planet = () => {
   const [planet, setPlanet] = useState({
@@ -23,7 +16,7 @@ const Planet = () => {
   });
 
   const [films, setFilms] = useState([]);
-  const [characters, setCharacters] = useState([])
+  const [characters, setCharacters] = useState([]);
 
   let params = useParams();
   let planetId = params.planetid;
@@ -59,13 +52,15 @@ const Planet = () => {
 
   useEffect(() => {
     const fetchCharactersByPlanetId = async () => {
-        const response = await fetch(`http://localhost:3000/api/planets/${planetId}/characters`);
+      const response = await fetch(
+        `http://localhost:3000/api/planets/${planetId}/characters`
+      );
 
-        if(!response.ok){
-            throw new Error("Data could not be fetched!");
-        }
-        const json_response = await response.json();
-        setCharacters(json_response);
+      if (!response.ok) {
+        throw new Error("Data could not be fetched!");
+      }
+      const json_response = await response.json();
+      setCharacters(json_response);
     };
     fetchCharactersByPlanetId();
   }, [planetId]);
@@ -88,16 +83,16 @@ const Planet = () => {
         <h2> Films featuring this planet </h2>
         {films?.map((film) => (
           <div key={film.film_id}>
-            <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
+            <Link to={`/films/${film.film_id}`}>{film.data[0].title}</Link>
           </div>
         ))}
       </section>
-      <section id ="characters"> 
+      <section id="characters">
         <h2>Characters from this planet</h2>
         {characters?.map((character) => (
-            <div key ={character.id}>
-                <a href={`/characters/${character.id}`}>{character.name}</a>
-            </div>
+          <div key={character.id}>
+            <Link to={`/characters/${character.id}`}>{character.name}</Link>
+          </div>
         ))}
       </section>
     </div>

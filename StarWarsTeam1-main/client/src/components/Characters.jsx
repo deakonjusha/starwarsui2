@@ -1,11 +1,11 @@
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Characters = (props) => {
   return (
     <div>
       {props.data.map((char) => (
         <div key={char.id}>
-          <a href={`/characters/${char.id}`}>{char.name}</a>
+          <Link to={`/characters/${char.id}`}>{char.name}</Link>
         </div>
       ))}
     </div>

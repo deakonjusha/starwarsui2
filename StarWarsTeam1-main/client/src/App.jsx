@@ -1,15 +1,11 @@
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Character from "./components/Character";
 import Characters from "./components/Characters";
-import CharacterList from "./components/CharacterList";
 import Planet from "./components/Planet";
 import Film from "./components/Film";
 
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   const [characters, setCharacters] = useState([]);

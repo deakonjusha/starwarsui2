@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  useParams,
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  Link,
-} from "react-router-dom";
+import { useParams, BrowserRouter as Router, Link } from "react-router-dom";
 
 const Character = (props) => {
   const [character, setCharacter] = useState({
@@ -76,7 +70,6 @@ const Character = (props) => {
         }
         const json_response = await response.json();
         setFilms(json_response);
-        console.log(json_response);
       };
 
       fetchFilmsByCharacterId();
@@ -96,14 +89,14 @@ const Character = (props) => {
       <section id="planets">
         <h2>Homeworld</h2>
         <p>
-          <a href={`/planets/${planets?.id}`}>{planets?.name}</a>
+          <Link to={`/planets/${planets?.id}`}>{planets?.name}</Link>
         </p>
       </section>
       <section id="films">
         <h2>Films appeared in</h2>
         {films?.map((film) => (
           <div key={film.film_id}>
-            <a href={`/films/${film.film_id}`}>{film.data[0].title}</a>
+            <Link to={`/films/${film.film_id}`}>{film.data[0].title}</Link>
           </div>
         ))}
       </section>
