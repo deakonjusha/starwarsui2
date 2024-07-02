@@ -46,3 +46,5 @@ const Film = () => {
         </div>
     );
 };
+
+export default Film;
