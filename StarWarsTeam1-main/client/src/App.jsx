@@ -22,7 +22,7 @@ function App() {
         const json_response = await response.json();
         setCharacters(json_response);
       } catch (error) {
-        console.error("Error fetching socks:", error);
+        console.error("Error fetching characters:", error);
       }
     };
     fetchCharacters();
